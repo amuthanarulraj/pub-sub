@@ -64,14 +64,26 @@ let pubsub = {
     unsubscribe: unsubscribe
 };
 
-let topic = 'Pub-Sub Topic';
-pubsub.subscribe(topic, (message) => {
+let topic1 = 'Pub-Sub Topic 1',
+    topic2 = 'Pub-Sub Topic 2';
+//Subscribers for topic 1
+pubsub.subscribe(topic1, (message) => {
     var element = document.createElement('h1');
-    element.innerHTML = `${topic} published message: ${message}`;
+    element.innerHTML = `Subscriber 1 ${topic1} published message ${message}`;
+    document.getElementsByTagName('body')[0].appendChild(element);
+});
+pubsub.subscribe(topic1, (message) => {
+    var element = document.createElement('h2');
+    element.innerHTML = `Subscriber 2 ${topic1} published message ${message}`;
+    document.getElementsByTagName('body')[0].appendChild(element);
+});
+//Subscribers for topic 2
+pubsub.subscribe(topic2, (message) => {
+    var element = document.createElement('h1');
+    element.innerHTML = `Subscriber 3 ${topic2} published message ${message}`;
     document.getElementsByTagName('body')[0].appendChild(element);
 });
 
 let listener = function () {
-    pubsub.publish(topic, 'Hello World');
-    pubsub.publish(topic, 'It works');
+    pubsub.publish(topic1, 'Hello World');
 };
